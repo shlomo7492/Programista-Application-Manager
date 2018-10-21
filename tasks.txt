@@ -1,0 +1,6 @@
+Creating html form that takes the students data
+Creating a main.js that changes the body elements of the page according to action taken.(form, list of students, edit form)
+Adding styling (still has to decide either my own css styles or to use bootstrap)
+Adding JQuery-min
+Creating validation.js to validate form input
+Creating actions.js to processed the date submitted in the form or from browser local storage
