@@ -15,7 +15,17 @@
 	</style>
 </head>
 <body>
-<!-- navbar cames here, there has to be the following links 'Students list' 'Add New Student' etc. -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">Aplication Manager</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="index.html?navigate=add">Add New Student</a></li>
+      <li><a href="index.html?navigate=list_all">List All Students</a></li>
+    </ul>
+  </div>
+</nav>
 <!-- here the real page goes, so I need to figure it  out how to write it... using JS;)-->
 	<div id="content">
 		<!--To use RegEx in pattern attribute to so I can validate the input data -->
@@ -23,7 +33,8 @@
 				adding minimum value to today's date -->
 	</div>
 	<script> 
-		printContent('add');
+		var navigate = location.search.split('navigate=')[1];
+		printContent(navigate);
 	</script>
 </body>
 </html>
