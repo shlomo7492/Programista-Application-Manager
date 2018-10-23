@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title id="title">Students Application Manager</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="main.js"></script>
+	<style>
+		.form_container{
+			margin-right:30%;
+			margin-left:30%; 
+			padding:5px;
+		}
+	</style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">Aplication Manager</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="form.html?navigate=add">Add New Student</a></li>
+      <li><a href="list.html?navigate=all">List All Students</a></li>
+    </ul>
+  </div>
+</nav>
+	<div id="content">
+		<form method="post" action="list.html?navigate=all" id="createForm">
+			<div class="form_container form-group" >
+			<!--To use RegEx in pattern attribute to so I can validate the input data -->
+				<h2 id='form_title'>Application Form(Add New Student)</h2>
+				<strong>Name:</strong> <input name="name" id="name" type="text" class="form-control" placeholder="Student Full name" size="50" required><br><br>'+
+				<strong>E-mail:</strong> <input type="text" name="email" class="form-control" size="50" placeholder="Student e-mail" autocomplete="off" required><br><br>'+
+				<strong>Age:</strong> <input type="number"  name="age" class="form-control" min="16"  required><br><br>'+
+				<strong>Phone Number:</strong> <input name="phone" type="text" class="form-control" placeholder="Student phone number" size="42" required><br><br>'+
+				<strong>Preferred Way of Communication:</strong><br>
+				<input type="radio" name="contactby" value="email" checked> E-mail<br>
+				<input type="radio" name="contactby" value="phone"> Phone<br><br>
+				<strong>English Level: </strong>'+
+				<select name="englishlevel" class="form-control" required>
+					<option value="beginner">Beginner</option>
+					<option value="elementary">Elementary(A1)</option>
+					<option value="preintermediate">Pre-intermediate(A2)</option>
+					<option value="lowintermediate">Low Intermediate(B1)</option>
+					<option value="intermediate">Intermediate (B1)</option>
+					<option value="upperintermediate">Upper Intermediate(B2)</option>
+					<option value="preadvanced">Pre-advanced(C1)</option>
+					<option value="advanced">Advanced(C2)</option>
+					<option value="veryadvanced">Very Advanced(C2)</option>
+				</select><br><br>
+				<strong>Available to Start:</strong>
+				<input type="date" name="startdate" min="" required><br><br>
+				<strong>Technical Skills and Courses:</strong> <br>
+				<textarea name="skillsandcourses" 
+						class="form-control" 
+						rows="10"  
+						cols="60" 
+						placeholder="Please tell us about your skills and the courses you have completed. You can leave this field blank.">
+				</textarea><br><br>
+				<strong>Short Personal Presentation:</strong><br>(e.g. reason for joining the program)<br>
+				<textarea name="selfpresentation" 
+						class="form-control" 
+						rows="10" 
+						cols="60"  
+						placeholder="Please write tell us more about yourself and your reasons to join the program? You can leave this field blank.">
+				</textarea><br><br>
+				<input type="checkbox" name="homestudy" value="true">Study from home<br><br>
+				<button id="submit" >Add</button>
+			</div>
+		</form>
+	</div>
+	<script> 
+		var navigate = location.search.split('navigate=')[1];
+		printContent(navigate);
+	</script>
+</body>
+</html>
