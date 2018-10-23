@@ -90,10 +90,17 @@ function listAllStudents(){
 		}
 		 else{
 			var students = JSON.parse(localStorage.getItem('savedStudents'));
-			var content = '';
+			var content = '<div class="table-responsive">'+ 
+							  '<h3> List of all students</h3>'+
+							  '<table class="table table-hover">';
 			for(i=0;i<students.length;i++){
-				content+='<p>'+students[i].name+'</p>';
+				content+='<tr>'+
+							'<td><a href="index.html?list='+students[i].name+'">'+students[i].name+'</a>'+'</td>'+
+							'<td><a href="">Edit</a></td>'+//Edit button
+							'<td><a href="">Delete</a></td>'+//Delete button
+						'</tr>';
 			}
+			content+='</table>'+'</div>';
 			document.getElementById('content').innerHTML = content;
 		} 
 } 
