@@ -30,7 +30,8 @@ var addNew = '<form method="post" action="index.html?navigate=listall" id="creat
 				'<textarea name="selfpresentation" id="selfpresentation" class="form-control" rows="10" cols="60"  placeholder="Please write tell us more about yourself and your reasons to join the program?">'+
 				'</textarea><br><br>'+
 				'<input type="checkbox" name="homestudy" id="homestudy" value="true">Study from home<br><br>'+
-				'<button id="submit" onclick="AddNewStudent()" >Add</button>'+
+				'<button id="submit" onclick="AddNewStudent()" class="btn btn-primary">Add</button>&nbsp;'+
+				'<input type="reset" name="reset" class="btn btn-danger">'+
 			'</div>'+
 		'</form>';
 /*Provides simple navigation trough application's functionality 
