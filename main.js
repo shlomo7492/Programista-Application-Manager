@@ -80,8 +80,7 @@ function AddNewStudent(){
 			var students=JSON.parse(localStorage.getItem('savedStudents'));
 		}
 		students.push(student);
-		localStorage.setItem('savedStudents', JSON.stringify(students));
-		
+		localStorage.setItem('savedStudents', JSON.stringify(students));	
 } 
 /*Reading the data in localStorage 'savedStudents' 
 and displays it in table-like format*/
