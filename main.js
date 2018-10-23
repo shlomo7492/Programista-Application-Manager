@@ -96,8 +96,8 @@ function listAllStudents(){
 			for(i=0;i<students.length;i++){
 				content+='<tr>'+
 							'<td><a href="index.html?list='+students[i].name+'">'+students[i].name+'</a>'+'</td>'+
-							'<td><a href="">Edit</a></td>'+//Edit button
-							'<td><a href="">Delete</a></td>'+//Delete button
+							'<td class="btns"><a href="" class="btn btn-success">Edit</a></td>'+//Edit button
+							'<td class="btns"><a href="" class="btn btn-danger">Delete</a></td>'+//Delete button
 						'</tr>';
 			}
 			content+='</table>'+'</div>';
