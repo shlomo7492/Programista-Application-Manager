@@ -7,8 +7,8 @@ var addNew = '<form method="post" action="index.html?navigate=listall" id="creat
 				'<strong>Student\'s Age:</strong> <input type="number"  name="age" id="age" class="form-control" min="16"  required><br><br>'+
 				'<strong>Student\'s Phone Number:</strong> <input name="phone" id="phone" type="text" class="form-control" placeholder="Student phone number" size="42" required><br><br>'+
 				'<strong>Preferred Way of Communication:</strong><br>'+
-				'<input type="radio" name="contactby" value="email" checked> E-mail<br>'+
-				'<input type="radio" name="contactby" value="phone"> Phone<br><br>'+
+				'<input type="radio" name="contactby" id="byemail" value="email" checked> E-mail<br>'+
+				'<input type="radio" name="contactby" id="byphone" value="phone"> Phone<br><br>'+
 				'<strong>English Level: </strong>'+
 				'<select name="englishlevel" id="englishlevel" class="form-control" required>'+
 				'	<option value="beginner">Beginner</option>'+
@@ -31,7 +31,7 @@ var addNew = '<form method="post" action="index.html?navigate=listall" id="creat
 				'<textarea name="selfpresentation" id="selfpresentation" class="form-control" rows="10" cols="60"'+
 				' placeholder="Please write tell us more about yourself and your reasons to join the program.">'+
 				'</textarea><br><br>'+
-				'<input type="checkbox" name="homestudy" id="homestudy" value="true">Study from home<br><br>'+
+				'<input type="checkbox" name="homestudy" id="homestudy">Study from home<br><br>'+
 				'<button id="submit" onclick="AddNewStudent()" class="btn btn-primary">Add</button>&nbsp;'+
 				'<input type="reset" name="reset" class="btn btn-danger">'+
 			'</div>'+
@@ -67,7 +67,12 @@ function AddNewStudent(){
 	var startdate = document.getElementById('startdate').value;
 	var skillsandcourses = document.getElementById('skillsandcourses').value;
 	var selfpresentation = document.getElementById('selfpresentation').value;	
-	var homestudy = document.getElementById('homestudy').value;
+	if(document.getElementById('homestudy').checked){
+		var homestudy = 'Yes';
+	}
+	else{
+		var homestudy = 'No';
+	}
 	var student = {
 		"name":name,
 		"email":email,
@@ -103,7 +108,7 @@ function listAllStudents(){
 			for(i=0;i<students.length;i++){
 				content+='<tr>'+
 							'<td><a href="index.html?navigate='+students[i].name+'">'+students[i].name+'</a>'+'</td>'+
-							'<td class="btns"><a href="" class="btn btn-success">Edit</a></td>'+//Edit button
+							'<td class="btns"><button onclick="updateStudentInfo(\''+students[i].name+'\')" class="btn btn-success">Edit</button></td>'+//Edit button
 							'<td class="btns"><button onclick="removeStudent(\''+students[i].name+'\')" class="btn btn-danger">Delete</button></td>'+//Delete button
 						'</tr>';
 			}
@@ -130,9 +135,9 @@ function listStudent(name){
 							'<p><strong>Student\'s  info:</strong> '+students[i].selfpresentation+'</p>'+
 							'<p><strong>Studying from home:</strong> '+students[i].homestudy+'</p>'+
 							'<hr>'+
-							'<p><a href="" class="btn btn-success">Edit</a>&nbsp;'+//Edit button
-							'<button onclick="removeStudent('+name+')" class="btn btn-danger">Delete</button></p>'+
-							'</div>';//Delete button
+							'<p><button onclick="updateStudentInfo(\''+students[i].name+'\')" class="btn btn-success">Edit</button>&nbsp;'+//Edit button
+							'<button onclick="removeStudent(\''+students[i].name+'\')" class="btn btn-danger">Delete</button></p>'+//Delete button
+							'</div>';
 							break;
 				}
 				
@@ -141,11 +146,74 @@ function listStudent(name){
 }
 
 /*Displays form and sets values to all data of chosen student from localStorage.savedStudents 
-then updates the JSON array and updates the localStorage.savedStudents */
+then changes submit button onclick behavior  */
 function updateStudentInfo(name){
-	
+	document.getElementById("content").innerHTML = addNew;
+	var students = JSON.parse(localStorage.getItem('savedStudents'));
+	for(i=0;i<students.length;i++){
+		if(students[i].name==name){
+			document.getElementById("name").value =	students[i].name;
+			document.getElementById("email").value = students[i].email;
+			document.getElementById("age").value =	students[i].age;
+			document.getElementById("phone").value = students[i].phone;
+			if(students[i].contactBy == 'phone'){
+				document.getElementById('byemail').removeAttribute("checked"); 
+				var radio = document.getElementById('byphone');
+				var att = document.createAttribute("checked");
+				radio.setAttributeNode(att);
+			}
+			document.getElementById("englishlevel").value = students[i].englishlevel;
+			document.getElementById("startdate").value = students[i].startdate;
+			document.getElementById("skillsandcourses").value = students[i].skillsandcourses;
+			document.getElementById("selfpresentation").value = students[i].selfpresentation;
+			if(students[i].homestudy == 'Yes'){
+				var check = document.getElementById('homestudy');
+				var att = document.createAttribute("checked");
+				check.setAttributeNode(att);
+			}
+			document.getElementById("submit").innerHTML='Update';
+			document.getElementById("submit").setAttribute("onclick","updateStudentData(\'"+students[i].name+"\')");
+		}
+	}
 }
-
+/*updates the JSON array and updates the localStorage.savedStudents*/
+function updateStudentData(student){
+	var name = document.getElementById('name').value;
+	var email = document.getElementById('email').value;
+	var age = document.getElementById('age').value;
+	var phone = document.getElementById('phone').value;
+	var contactBy = $('input:radio[name=contactby]:checked').val();
+	var englishlevel = document.getElementById('englishlevel').value;
+	var startdate = document.getElementById('startdate').value;
+	var skillsandcourses = document.getElementById('skillsandcourses').value;
+	var selfpresentation = document.getElementById('selfpresentation').value;	
+	var homestudy;
+	if(document.getElementById('homestudy').checked){
+		homestudy = 'Yes';
+	}
+	else{
+		homestudy = 'No';
+	}
+	var students = JSON.parse(localStorage.getItem('savedStudents'));
+	for(i=0;i<students.length;i++){
+		if(students[i].name==student){
+			students[i] = {
+				"name":name,
+				"email":email,
+				"age":age,
+				"phone":phone,
+				"contactBy":contactBy,
+				"englishlevel":englishlevel,
+				"startdate":startdate,
+				"skillsandcourses":skillsandcourses,
+				"selfpresentation":selfpresentation,
+				"homestudy":homestudy}; 
+			student=students[i].name;
+		}
+	}
+	localStorage.setItem('savedStudents', JSON.stringify(students));	
+	listStudent(student);
+}
 /*Reads all data from localStorage.savedStudents, removes chosen student data 
 and updates localStorage.savedStudents */
 
