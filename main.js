@@ -24,10 +24,12 @@ var addNew = '<form method="post" action="index.html?navigate=listall" id="creat
 				'<strong>Available to Start:</strong>'+
 				'<input type="date" name="startdate"  id="startdate" min="" required><br><br>'+
 				'<strong>Technical Skills and Courses:</strong> <br>'+
-				'<textarea name="skillsandcourses" id="skillsandcourses" class="form-control" rows="10"  cols="60" >'+
+				'<textarea name="skillsandcourses" id="skillsandcourses" class="form-control" rows="10"  cols="60"'+
+				' placeholder="Please write tell us about your skills and any completed courses that may be relevant to your application.">'+
 				'</textarea><br><br>'+
 				'<strong>Short Personal Presentation:</strong><br>(e.g. reason for joining the program)<br>'+
-				'<textarea name="selfpresentation" id="selfpresentation" class="form-control" rows="10" cols="60"  placeholder="Please write tell us more about yourself and your reasons to join the program?">'+
+				'<textarea name="selfpresentation" id="selfpresentation" class="form-control" rows="10" cols="60"'+
+				' placeholder="Please write tell us more about yourself and your reasons to join the program.">'+
 				'</textarea><br><br>'+
 				'<input type="checkbox" name="homestudy" id="homestudy" value="true">Study from home<br><br>'+
 				'<button id="submit" onclick="AddNewStudent()" class="btn btn-primary">Add</button>&nbsp;'+
@@ -43,6 +45,9 @@ function printContent(navVar){
 	}
 	else if(navVar == 'listall'){
 		listAllStudents();
+	} 
+	else{
+		listStudent(navVar);
 	}
 	
 }
@@ -83,7 +88,8 @@ function AddNewStudent(){
 		students.push(student);
 		localStorage.setItem('savedStudents', JSON.stringify(students));	
 } 
-/*Reading the data in localStorage 'savedStudents' 
+
+/*Reading the data in localStorage.savedStudents 
 and displays it in table-like format*/
 function listAllStudents(){
 	if(localStorage.savedStudents==null){
@@ -96,7 +102,7 @@ function listAllStudents(){
 							  '<table class="table table-hover">';
 			for(i=0;i<students.length;i++){
 				content+='<tr>'+
-							'<td><a href="index.html?list='+students[i].name+'">'+students[i].name+'</a>'+'</td>'+
+							'<td><a href="index.html?navigate='+students[i].name+'">'+students[i].name+'</a>'+'</td>'+
 							'<td class="btns"><a href="" class="btn btn-success">Edit</a></td>'+//Edit button
 							'<td class="btns"><a href="" class="btn btn-danger">Delete</a></td>'+//Delete button
 						'</tr>';
@@ -105,3 +111,44 @@ function listAllStudents(){
 			document.getElementById('content').innerHTML = content;
 		} 
 } 
+
+/*Reading data from localStorage.savedStudents and displays chosen student*/
+function listStudent(name){
+			var students = JSON.parse(localStorage.getItem('savedStudents'));
+			var content = '<div class="form_container">'+
+							'<h3>'+name+'</h3>';
+			for(i=0;i<students.length;i++){
+				if(students[i].name==name){
+					content+='<hr>'+
+							'<p><strong>Student E-mail:</strong> '+students[i].email+'</p>'+
+							'<p><strong>Student age:</strong> '+students[i].age+'</p>'+
+							'<p><strong>Student Phone number:</strong> '+students[i].phone+'</p>'+
+							'<p><strong>To be contacted by:</strong> '+students[i].contactby+'</p>'+
+							'<p><strong>Student English level:</strong> '+students[i].englishlevel+'</p>'+
+							'<p><strong>Available to start:</strong> '+students[i].startdate+'</p>'+
+							'<p><strong>Any skills and courses:</strong> '+students[i].skillsandcourses+'</p>'+
+							'<p><strong>Student info:</strong> '+students[i].selfpresentation+'</p>'+
+							'<p><strong>Studying from home:</strong> '+students[i].homestudy+'</p>'+
+							'<hr>'+
+							'<p><a href="" class="btn btn-success">Edit</a>&nbsp;'+//Edit button
+							'<a href="" class="btn btn-danger">Delete</a></p>'+
+							'</div>';//Delete button
+							break;
+				}
+				
+			}
+			document.getElementById('content').innerHTML = content;
+}
+
+/*Displays form and sets values to all data of chosen student from localStorage.savedStudents 
+then updates the JSON array and updates the localStorage.savedStudents */
+function updateStudentInfo(name){
+	
+}
+
+/*Reads all data from localStorage.savedStudents, removes chosen student data 
+and updates localStorage.savedStudents */
+
+function removeStudent(name){
+	
+}
