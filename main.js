@@ -1,9 +1,10 @@
 var addNew = '<form method="post" action="index.html?navigate=listall" id="createForm">'+
 			'<div class="form_container form-group" >'+
 			'<!--To use RegEx in pattern attribute to so I can validate the input data -->'+
-				'<h2>Application Form(Add New Student)</h2>'+
+				'<h2 id="form_title">Application Form(Add New Student)</h2>'+
 				'<strong>Student\'s Name:</strong> <input name="name" id="name" type="text" class="form-control" placeholder="Student Full name" size="50" required><br><br>'+
-				'<strong>Student\'s E-mail:</strong> <input type="text" name="email" id="email" class="form-control" size="50" placeholder="Student e-mail" autocomplete="off" required><br><br>'+
+				'<strong>Student\'s E-mail:</strong> <input type="text" name="email" id="email" class="form-control" size="50" placeholder="Student e-mail" autocomplete="off"'+
+				'  pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$" required><br><br>'+
 				'<strong>Student\'s Age:</strong> <input type="number"  name="age" id="age" class="form-control" min="16"  required><br><br>'+
 				'<strong>Student\'s Phone Number:</strong> <input name="phone" id="phone" type="text" class="form-control" placeholder="Student phone number" size="42" required><br><br>'+
 				'<strong>Preferred Way of Communication:</strong><br>'+
@@ -46,6 +47,12 @@ function printContent(navVar){
 	else if(navVar == 'listall'){
 		listAllStudents();
 	} 
+	else if(navVar==null){
+		document.getElementById("content").innerHTML = '<h3>Student Application Manager v1.0a</h3>'+
+		'<p>This webapp is created by Dimitar Daskalov as part of application process for Programista Internship Program, October\'2018'+
+		'<p> To add new Student click the \'Add New Student\' link above '+
+		'and to vew All Students click the \'List All Students\' link next to it.</p>';
+	}
 	else{
 		listStudent(navVar);
 	}
@@ -149,6 +156,7 @@ function listStudent(name){
 then changes submit button onclick behavior  */
 function updateStudentInfo(name){
 	document.getElementById("content").innerHTML = addNew;
+	document.getElementById("form_title").innerHTML='Update Students\' Application Data';
 	var students = JSON.parse(localStorage.getItem('savedStudents'));
 	for(i=0;i<students.length;i++){
 		if(students[i].name==name){
@@ -172,6 +180,7 @@ function updateStudentInfo(name){
 				check.setAttributeNode(att);
 			}
 			document.getElementById("submit").innerHTML='Update';
+			document.getElementById("submit").setAttribute("class","btn btn-success");
 			document.getElementById("submit").setAttribute("onclick","updateStudentData(\'"+students[i].name+"\')");
 		}
 	}

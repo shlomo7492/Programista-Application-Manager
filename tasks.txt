@@ -1,5 +1,0 @@
-DONE >> Creating html form that takes the students data
-To crate separate page for Main page, add new student, edit strudent,
-	view student, list all students... since I haven't fount a way to make it on single page...
-Done Bootstrap wins for now >> Adding styling (still has to decide either my own css styles or to use bootstrap)
-DONE >> Adding JQuery-min
