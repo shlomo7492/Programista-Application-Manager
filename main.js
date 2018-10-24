@@ -123,7 +123,7 @@ function listStudent(name){
 							'<p><strong>Student E-mail:</strong> '+students[i].email+'</p>'+
 							'<p><strong>Student age:</strong> '+students[i].age+'</p>'+
 							'<p><strong>Student Phone number:</strong> '+students[i].phone+'</p>'+
-							'<p><strong>To be contacted by:</strong> '+students[i].contactby+'</p>'+
+							'<p><strong>To be contacted by:</strong> '+students[i].contactBy+'</p>'+
 							'<p><strong>Student English level:</strong> '+students[i].englishlevel+'</p>'+
 							'<p><strong>Available to start:</strong> '+students[i].startdate+'</p>'+
 							'<p><strong>Any skills and courses:</strong> '+students[i].skillsandcourses+'</p>'+
