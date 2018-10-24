@@ -2,10 +2,10 @@ var addNew = '<form method="post" action="index.html?navigate=listall" id="creat
 			'<div class="form_container form-group" >'+
 			'<!--To use RegEx in pattern attribute to so I can validate the input data -->'+
 				'<h2>Application Form(Add New Student)</h2>'+
-				'<strong>Name:</strong> <input name="name" id="name" type="text" class="form-control" placeholder="Student Full name" size="50" required><br><br>'+
-				'<strong>E-mail:</strong> <input type="text" name="email" id="email" class="form-control" size="50" placeholder="Student e-mail" autocomplete="off" required><br><br>'+
-				'<strong>Age:</strong> <input type="number"  name="age" id="age" class="form-control" min="16"  required><br><br>'+
-				'<strong>Phone Number:</strong> <input name="phone" id="phone" type="text" class="form-control" placeholder="Student phone number" size="42" required><br><br>'+
+				'<strong>Student\'s Name:</strong> <input name="name" id="name" type="text" class="form-control" placeholder="Student Full name" size="50" required><br><br>'+
+				'<strong>Student\'s E-mail:</strong> <input type="text" name="email" id="email" class="form-control" size="50" placeholder="Student e-mail" autocomplete="off" required><br><br>'+
+				'<strong>Student\'s Age:</strong> <input type="number"  name="age" id="age" class="form-control" min="16"  required><br><br>'+
+				'<strong>Student\'s Phone Number:</strong> <input name="phone" id="phone" type="text" class="form-control" placeholder="Student phone number" size="42" required><br><br>'+
 				'<strong>Preferred Way of Communication:</strong><br>'+
 				'<input type="radio" name="contactby" value="email" checked> E-mail<br>'+
 				'<input type="radio" name="contactby" value="phone"> Phone<br><br>'+
@@ -104,7 +104,7 @@ function listAllStudents(){
 				content+='<tr>'+
 							'<td><a href="index.html?navigate='+students[i].name+'">'+students[i].name+'</a>'+'</td>'+
 							'<td class="btns"><a href="" class="btn btn-success">Edit</a></td>'+//Edit button
-							'<td class="btns"><a href="" class="btn btn-danger">Delete</a></td>'+//Delete button
+							'<td class="btns"><button onclick="removeStudent(\''+students[i].name+'\')" class="btn btn-danger">Delete</button></td>'+//Delete button
 						'</tr>';
 			}
 			content+='</table>'+'</div>';
@@ -120,18 +120,18 @@ function listStudent(name){
 			for(i=0;i<students.length;i++){
 				if(students[i].name==name){
 					content+='<hr>'+
-							'<p><strong>Student E-mail:</strong> '+students[i].email+'</p>'+
-							'<p><strong>Student age:</strong> '+students[i].age+'</p>'+
-							'<p><strong>Student Phone number:</strong> '+students[i].phone+'</p>'+
+							'<p><strong>Student\'s  E-mail:</strong> '+students[i].email+'</p>'+
+							'<p><strong>Student\'s  age:</strong> '+students[i].age+'</p>'+
+							'<p><strong>Student\'s  Phone number:</strong> '+students[i].phone+'</p>'+
 							'<p><strong>To be contacted by:</strong> '+students[i].contactBy+'</p>'+
-							'<p><strong>Student English level:</strong> '+students[i].englishlevel+'</p>'+
+							'<p><strong>Student\'s  English level:</strong> '+students[i].englishlevel+'</p>'+
 							'<p><strong>Available to start:</strong> '+students[i].startdate+'</p>'+
-							'<p><strong>Any skills and courses:</strong> '+students[i].skillsandcourses+'</p>'+
-							'<p><strong>Student info:</strong> '+students[i].selfpresentation+'</p>'+
+							'<p><strong>Student\'s  skills and courses:</strong> '+students[i].skillsandcourses+'</p>'+
+							'<p><strong>Student\'s  info:</strong> '+students[i].selfpresentation+'</p>'+
 							'<p><strong>Studying from home:</strong> '+students[i].homestudy+'</p>'+
 							'<hr>'+
 							'<p><a href="" class="btn btn-success">Edit</a>&nbsp;'+//Edit button
-							'<a href="" class="btn btn-danger">Delete</a></p>'+
+							'<button onclick="removeStudent('+name+')" class="btn btn-danger">Delete</button></p>'+
 							'</div>';//Delete button
 							break;
 				}
@@ -150,5 +150,17 @@ function updateStudentInfo(name){
 and updates localStorage.savedStudents */
 
 function removeStudent(name){
+	var action = confirm('You are about to delete all data of student '+
+						name+'. Are you sure you want to do that? \n Press OK to continue, and Cancel to leave the data as it is.');
+	var students = JSON.parse(localStorage.getItem('savedStudents'));
+	var studentsUpdated = [];
 	
+	for(i=0;i<students.length;i++){
+		if(students[i].name!=name){
+			studentsUpdated.push(students[i]);
+		}
+	}
+	localStorage.setItem('savedStudents',JSON.stringify(studentsUpdated));
+	listAllStudents();
+	alert('Student with name'+name+' was removed from the Database.');
 }
