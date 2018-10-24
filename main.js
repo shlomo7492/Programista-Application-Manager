@@ -3,12 +3,12 @@ var addNew = '<form method="post" action="index.html?navigate=listall" id="creat
 			'<!--To use RegEx in pattern attribute to so I can validate the input data -->'+
 				'<h2 id="form_title">Application Form(Add New Student)</h2>'+
 				'<strong>Student\'s Name:</strong> <input name="name" id="name" type="text" class="form-control"'+
-				'placeholder="Student Full name" pattern="([A-Za-z]*\s{1,3})" size="50" required><br><br>'+
+				'placeholder="Student Full name"  size="50" required><br><br>'+
 				'<strong>Student\'s E-mail:</strong> <input type="text" name="email" id="email" class="form-control" size="50" placeholder="Student e-mail" autocomplete="off"'+
 				'  pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$" required><br><br>'+
 				'<strong>Student\'s Age:</strong> <input type="number"  name="age" id="age" class="form-control" min="16"  required><br><br>'+
 				'<strong>Student\'s Phone Number:</strong> <input name="phone" id="phone" type="text" class="form-control"'+ 
-				'placeholder="Student phone number (0XXXXXXXXX)"  required><br><br>'+
+				'placeholder="Student phone number:"  required><br><br>'+
 				'<strong>Preferred Way of Communication:</strong><br>'+
 				'<input type="radio" name="contactby" id="byemail" value="email" checked> E-mail<br>'+
 				'<input type="radio" name="contactby" id="byphone" value="phone"> Phone<br><br>'+
@@ -250,12 +250,11 @@ function removeStudent(name){
 //Validation
 
 function validateFormInput(){
-	var name = document.getElementById('name').validity.valid;
 	var email = document.getElementById('email').validity.valid;
 	var age = document.getElementById('age').validity.valid;
 	//var phone = document.getElementById('phone').validity.valid;
 	//var startdate = document.getElementById('startdate').validity.valid;
-	if(name&email&age){
+	if(email&age){
 		return true;
 	}
 }
