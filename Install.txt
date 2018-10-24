@@ -1,6 +1,6 @@
 Installation process is easy:
-1) Extract Programista Application Manager.zip file => Programista Application Manager folder will appear. 
-2) Double click on index.html. The app will open in your default browser. 
+1) Extract Programista-Application-Manager.zip file => Programista-Application-Manager folder will appear. 
+2) Double click on index.html. The app will start in your default browser. 
 3) Enjoy!
 
 Note: Some bugs fixing needed, such as validation of application form and removing duplicate applications.
