@@ -4,3 +4,5 @@ Installation process is easy:
 3) Enjoy!
 
 Note: Some bugs fixing needed, such as validation of application form and removing duplicate applications.
+
+validation should be done shortly... in the next decade...
