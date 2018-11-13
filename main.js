@@ -3,7 +3,11 @@ var addNew = '<form method="post" action="index.html?navigate=listall" id="creat
 			'<!--To use RegEx in pattern attribute to so I can validate the input data -->'+
 				'<h2 id="form_title">Application Form(Add New Student)</h2>'+
 				'<strong>Student\'s Name:</strong> <input name="name" id="name" type="text" class="form-control"'+
+<<<<<<< HEAD
 				'placeholder="Student Full name" size="50" required><br><br>'+
+=======
+				'placeholder="Student Full name"  size="50" required><br><br>'+
+>>>>>>> 2fa713b3ee4a50baf3ec330fd19eb4f9cc44de9d
 				'<strong>Student\'s E-mail:</strong> <input type="text" name="email" id="email" class="form-control" size="50" placeholder="Student e-mail" autocomplete="off"'+
 				'  pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$" required><br><br>'+
 				'<strong>Student\'s Age:</strong> <input type="number"  name="age" id="age" class="form-control" min="16"  required><br><br>'+
